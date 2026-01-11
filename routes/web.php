@@ -9,8 +9,8 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\Admin\ExamResultController;
-use App\Http\Controllers\ExamResultPublicController;
+use App\Http\Controllers\Admin\ExamResultController as AdminExamResultController;
+use App\Http\Controllers\ExamResultController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttendanceController;
 
@@ -157,13 +157,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
 
+// Public/User
+Route::get('/exam-results', [ExamResultController::class, 'publicIndex'])
+    ->name('exam-results.public');
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::resource('exam-results', ExamResultController::class);
-});
-
-Route::get('/exam-results', [ExamResultPublicController::class, 'index'])
-    ->name('exam-results.index');
+// Admin
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('exam-results', ExamResultController::class);});
 
  
 Route::get('/attendance', [AttendanceController::class, 'index'])
