@@ -46,8 +46,71 @@
             <input type="date"
                    name="date"
                    class="form-control"
-                   value="{{ old('date', $event->date) }}">
+                   value="{{ old('date', optional($event->date)->format('Y-m-d') ?? $event->date) }}">
         </div>
+
+        {{-- Current Image Preview --}}
+        @if($event->image)
+            <div class="mb-3">
+                <label class="form-label d-block">Current Image</label>
+                <img src="{{ asset('storage/'.$event->image) }}"
+                     alt="Event Image"
+                     class="img-fluid rounded border"
+                     style="max-height:220px;">
+                <div class="form-check mt-2">
+                    <input class="form-check-input"
+                           type="checkbox"
+                           name="remove_image"
+                           value="1"
+                           id="remove_image">
+                    <label class="form-check-label" for="remove_image">
+                        Remove current image
+                    </label>
+                </div>
+            </div>
+        @endif
+
+        {{-- Upload New Image --}}
+        <div class="mb-3">
+            <label class="form-label">Replace Image (optional)</label>
+            <input type="file"
+                   name="image"
+                   class="form-control"
+                   accept="image/*">
+        </div>
+
+        {{-- Video --}}
+        <div class="mb-3">
+            <label class="form-label">Video (YouTube URL or MP4 URL)</label>
+            <input type="text"
+                   name="video"
+                   class="form-control"
+                   value="{{ old('video', $event->video) }}"
+                   placeholder="https://youtube.com/... or https://.../video.mp4">
+        </div>
+
+        {{-- Video Preview (optional) --}}
+        @if($event->video)
+            <div class="mb-3">
+                <label class="form-label d-block">Current Video</label>
+
+                @php
+                    $v = $event->video;
+                    $isYoutube = str_contains($v, 'youtube') || str_contains($v, 'youtu.be');
+                @endphp
+
+                @if($isYoutube)
+                    <iframe width="100%" height="315"
+                            src="{{ $v }}"
+                            frameborder="0"
+                            allowfullscreen></iframe>
+                @else
+                    <video controls width="100%" style="max-height:360px;">
+                        <source src="{{ $v }}" type="video/mp4">
+                    </video>
+                @endif
+            </div>
+        @endif
 
         {{-- Buttons --}}
         <button type="submit" class="btn btn-primary">Update</button>

@@ -333,9 +333,9 @@
             </ul>
             <hr>
             <div class="d-flex align-items-center gap-2">
-              <span class="chip"><i class="bi bi-wifi me-1"></i> <a class="nav-link" href="{{ url('/exam-results') }}">Exam Results</a></span>
-              <span class="chip"><i class="bi bi-translate me-1"></i> Eng/MM</span>
-              <span class="chip"><i class="bi bi-emoji-smile me-1"></i> Well-being</span>
+              <span class="chip"><i class="bi bi-wifi me-1" ></i> <a class="nav-link" href="{{ url('/exam-results')  }}">Exam Results</a></span>
+              <!-- <span class="chip"><i class="bi bi-translate me-1"></i> Eng/MM</span>
+              <span class="chip"><i class="bi bi-emoji-smile me-1"></i> Well-being</span> -->
             </div>
           </div>
         </div>

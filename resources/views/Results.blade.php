@@ -1,6 +1,8 @@
 @extends('layouts.app') <!-- သင့် layout ပေါ်မူတည်ပြီး -->
 @section('content')
 
+
+
 <div class="container">
     <h2 class="mb-4">Your Results</h2>
 

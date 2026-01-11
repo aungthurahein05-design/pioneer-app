@@ -13,6 +13,8 @@ class event extends Model
         'title',
         'description',
         'date',
+        'image',
+    'video',
     ];
 
     // app/Models/Event.php

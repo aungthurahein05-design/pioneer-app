@@ -19,8 +19,8 @@
         /* ===== Global + Animated Shapes BG ===== */
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 50%, #38f9d7 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #f5deb3 0%, #ddb2f5 50%, #b2f5de 100%);
+            color: #eaf5b2;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
@@ -93,7 +93,7 @@
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 600;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 4px 10px rgba(151, 203, 232, 0.67);
             animation: fadeDown 2s ease;
         }
 
@@ -126,12 +126,12 @@
 
         .card:hover {
             transform: translateY(-5px);
-            background-color: rgba(179, 241, 156, 0.81);
+            background-color: rgba(156, 228, 241, 0.81);
             box-shadow: 0 16px 35px rgba(0,0,0,0.35);
         }
 
         footer {
-            background: hsla(126, 53%, 80%, 0.69);
+            background: hsla(202, 53%, 80%, 0.69);
             padding: 20px;
             text-align: center;
             color: #14a3d7d7;
@@ -156,7 +156,7 @@
             backdrop-filter: blur(8px);
         }
         #gallery .card-body {
-            color: #0b2239;
+            color: #df9cd2;
         }
 
         @media (max-width: 767.98px){

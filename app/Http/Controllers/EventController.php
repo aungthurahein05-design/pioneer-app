@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+    /* =========================
+       ADMIN SIDE
+    ========================== */
+
     public function index()
     {
-        $events = Event::all();
+        $events = Event::orderBy('date', 'desc')->get();
         return view('admin.events.index', compact('events'));
     }
 
@@ -24,13 +29,20 @@ class EventController extends Controller
             'title'       => 'required|string|max:255',
             'description' => 'nullable|string',
             'date'        => 'nullable|date',
+
+            // Media
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'video'       => 'nullable|string|max:2000', // YouTube / MP4 URL
         ]);
 
-        Event::create([
-            'title'       => $request->title,
-            'description' => $request->description,
-            'date'        => $request->date,
-        ]);
+        $data = $request->only(['title', 'description', 'date', 'video']);
+
+        // Upload image
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('events', 'public');
+        }
+
+        Event::create($data);
 
         return redirect()
             ->route('admin.events.index')
@@ -40,7 +52,6 @@ class EventController extends Controller
     public function edit($id)
     {
         $event = Event::findOrFail($id);
-
         return view('admin.events.edit', compact('event'));
     }
 
@@ -51,15 +62,31 @@ class EventController extends Controller
         $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
-            'date'        => 'required|date',           
+            'date'        => 'required|date',
+
+            // Media
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'video'       => 'nullable|string|max:2000',
+            'remove_image'=> 'nullable|boolean',
         ]);
 
-        // Update fields
-        $event->title = $request->title;
-        $event->description = $request->description;
-        $event->date = $request->date;        
+        $data = $request->only(['title', 'description', 'date', 'video']);
 
-        $event->save();
+        // Remove current image (checkbox)
+        if ($request->boolean('remove_image') && $event->image) {
+            Storage::disk('public')->delete($event->image);
+            $data['image'] = null;
+        }
+
+        // Replace image (new upload)
+        if ($request->hasFile('image')) {
+            if ($event->image) {
+                Storage::disk('public')->delete($event->image);
+            }
+            $data['image'] = $request->file('image')->store('events', 'public');
+        }
+
+        $event->update($data);
 
         return redirect()
             ->route('admin.events.index')
@@ -68,7 +95,12 @@ class EventController extends Controller
 
     public function destroy($id)
     {
-        $event = Event::findOrFail($id);       
+        $event = Event::findOrFail($id);
+
+        // delete image file
+        if ($event->image) {
+            Storage::disk('public')->delete($event->image);
+        }
 
         $event->delete();
 
@@ -78,17 +110,24 @@ class EventController extends Controller
     }
 
 
+    /* =========================
+       PUBLIC / USER SIDE
+    ========================== */
+
     public function publicIndex(Request $request)
     {
         $query = Event::query();
 
-        // Search
+        // Search (title/description)
         if ($request->filled('q')) {
-            $query->where('title', 'like', '%' . $request->q . '%')
-                  ->orWhere('description', 'like', '%' . $request->q . '%');
+            $q = $request->q;
+            $query->where(function ($sub) use ($q) {
+                $sub->where('title', 'like', "%{$q}%")
+                    ->orWhere('description', 'like', "%{$q}%");
+            });
         }
 
-        // Filters
+        // Filter: upcoming / past
         if ($request->type === 'upcoming') {
             $query->whereDate('date', '>=', now());
         } elseif ($request->type === 'past') {
@@ -97,11 +136,9 @@ class EventController extends Controller
 
         $events = $query
             ->orderBy('date', 'asc')
-            ->paginate(9);
+            ->paginate(9)
+            ->withQueryString();
 
         return view('events', compact('events'));
     }
-
-   
-
 }

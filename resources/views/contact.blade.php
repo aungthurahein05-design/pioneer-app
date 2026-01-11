@@ -5,9 +5,9 @@
 <style>
 :root{
   --pri:#0d6efd;
-  --acc:#00c2a8;
+  --acc:#F5DEB3;
   --ink:#1f2937;
-  --bg:#f5f7fb;
+  --bg:#FFEFD5;
   --card:#ffffff;
 }
 

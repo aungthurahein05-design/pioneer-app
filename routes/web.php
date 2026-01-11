@@ -172,6 +172,14 @@ Route::get('/attendance', [AttendanceController::class, 'index'])
 Route::post('/attendance/store', [AttendanceController::class, 'store'])
     ->name('attendance.store');
 
+//     Route::prefix('admin')->name('admin.')->middleware(['auth','is_admin'])->group(function () {
+//     Route::resource('events', EventController::class);
+// });
+
+Route::get('/events', [EventController::class, 'publicIndex'])
+    ->name('events.public');
+
+
 
 
 
