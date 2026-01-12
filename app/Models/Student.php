@@ -10,4 +10,12 @@ class Student extends Model
         'name',
         'nrc',   // ✅ required in DB, but we will auto-fill '-'
     ];
+
+    public function subjects()
+{
+    return $this->belongsToMany(\App\Models\Subject::class, 'student_subjects')
+        ->withPivot(['academic_year','term','status'])
+        ->withTimestamps();
+}
+
 }

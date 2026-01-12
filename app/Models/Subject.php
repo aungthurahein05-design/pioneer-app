@@ -14,4 +14,12 @@ class Subject extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public function students()
+{
+    return $this->belongsToMany(\App\Models\Student::class, 'student_subjects')
+        ->withPivot(['academic_year','term','status'])
+        ->withTimestamps();
+}
+
 }

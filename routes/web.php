@@ -19,6 +19,9 @@ use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admini\App\Http\Controllers\Admin\TeachingAssignmentController;
 
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\StudentSubjectController;
+
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('classrooms', ClassroomController::class);
@@ -178,6 +181,27 @@ Route::post('/attendance/store', [AttendanceController::class, 'store'])
 
 Route::get('/events', [EventController::class, 'publicIndex'])
     ->name('events.public');
+
+
+
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('promotions', [PromotionController::class, 'index'])->name('promotions.index');
+    Route::get('promotions/create', [PromotionController::class, 'create'])->name('promotions.create');
+    Route::post('promotions', [PromotionController::class, 'store'])->name('promotions.store');
+});
+
+
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
+    Route::get('students/{student}/subjects', [StudentSubjectController::class, 'create'])
+        ->name('students.subjects.create');
+
+    Route::post('students/{student}/subjects', [StudentSubjectController::class, 'store'])
+        ->name('students.subjects.store');
+});
+
 
 
 
