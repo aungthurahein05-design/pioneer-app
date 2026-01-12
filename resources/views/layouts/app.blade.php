@@ -106,18 +106,20 @@
                                 <!-- ✅ Student Promotion -->
                                 <li><a class="dropdown-item" href="{{ route('admin.promotions.index') }}">Student Promotion</a></li>
 
+                                <!-- Exam Result link -->
+                                <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('admin.exam-results.create') }}">
+                                Exam Result
+                                </a>
+                                </li>
+
                                 <!-- ✅ Student Subject Assign (if you created routes) -->
-                                {{-- Example link (adjust if your route name differs) --}}
-                                {{-- <li><a class="dropdown-item" href="{{ route('admin.students.index') }}">Student Subjects</a></li> --}}
+                                <!-- {{-- Example link (adjust if your route name differs) --}}
+                                {{-- <li><a class="dropdown-item" href="{{ route('admin.students.index') }}">Student Subjects</a></li> --}} -->
                             </ul>
                         </li>
 
-                        <!-- Exam Result link -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.exam-results.create') }}">
-                                Exam Result
-                            </a>
-                        </li>
+                        
 
                     @endif
                 @endauth
