@@ -1,140 +1,229 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.app')
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+@section('content')
+<style>
+    /* ===== Animated Shapes BG ===== */
+    .animated-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+    }
+    .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(4px);
+        animation: floatUp 12s infinite ease-in-out;
+    }
+    .shape:nth-child(1) { width: 140px; height: 140px; left: 10%; bottom: -150px; animation-duration: 12s; }
+    .shape:nth-child(2) { width: 90px; height: 90px; left: 70%; bottom: -120px; animation-duration: 10s; }
+    .shape:nth-child(3) { width: 160px; height: 160px; left: 40%; bottom: -180px; animation-duration: 15s; }
+    .shape:nth-child(4) { width: 110px; height: 110px; left: 85%; bottom: -160px; animation-duration: 18s; }
+    .shape:nth-child(5) { width: 70px; height: 70px; left: 25%; bottom: -150px; animation-duration: 14s; }
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    @keyframes floatUp {
+        0%   { transform: translateY(0) scale(1); opacity: .6; }
+        50%  { transform: translateY(-400px) scale(1.15); opacity: 1; }
+        100% { transform: translateY(-800px) scale(.9); opacity: 0; }
+    }
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    .blob {
+        position: absolute;
+        filter: blur(100px);
+        opacity: 0.7;
+        animation: blobMove 20s infinite ease-in-out;
+    }
+    .blob:nth-child(6) { width: 400px; height: 400px; background: #ff6bcb; left: -10%; top: 20%; }
+    .blob:nth-child(7) { width: 350px; height: 350px; background: #42a5f5; right: -10%; top: 30%; }
+    .blob:nth-child(8) { width: 300px; height: 300px; background: #00e5ff; left: 40%; top: -10%; }
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    @keyframes blobMove {
+        0%   { transform: translate(0,0) scale(1); }
+        50%  { transform: translate(60px,-80px) scale(1.2); }
+        100% { transform: translate(0,0) scale(1); }
+    }
 
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    /* ===== Page Look ===== */
+    .pioneer-page {
+        font-family: 'Poppins', sans-serif;
+        color: #eaf5b2;
+        overflow-x: hidden;
+    }
 
-    <style>
-        body { padding-top: 70px; }
+    /* Hero */
+    .hero {
+        height: 100vh;
+        background-image: url('{{ asset('images/Pioneer1.jpg') }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: rgba(190, 232, 134, 0.3);
+        background-blend-mode: overlay;
+    }
+    .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 600;
+        text-shadow: 0 4px 10px rgba(151, 203, 232, 0.67);
+        animation: fadeDown 2s ease;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        animation: fadeUp 2s ease;
+    }
+    @keyframes fadeDown {
+        from { transform: translateY(-30px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to   { transform: translateY(0); opacity: 1; }
+    }
 
-        .clean-navbar {
-            background-color: #ace1f9c8;
-            border-bottom: 1px solid #48b6ed97;
-        }
+    /* Cards */
+    .glass-card {
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.14);
+        backdrop-filter: blur(10px);
+        color: #e8f7ff;
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        overflow: hidden;
+    }
+    .glass-card:hover {
+        transform: translateY(-5px);
+        background-color: rgba(156, 228, 241, 0.25);
+        box-shadow: 0 16px 35px rgba(0,0,0,0.35);
+    }
+    .glass-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        background-color: rgba(158, 236, 240, 0.36);
+    }
 
-        .navbar-nav .nav-link {
-            color: #333;
-            font-weight: 500;
-            padding: 8px 14px;
-            border-radius: 6px;
-        }
+    /* Gallery bg-light override */
+    #gallery.bg-light {
+        background: rgba(255,255,255,0.10) !important;
+        backdrop-filter: blur(8px);
+    }
 
-        .navbar-nav .nav-link:hover {
-            background-color: #f3f3f3;
-            color: #007bff;
-        }
+    /* Auth links (if you really want overlay links) */
+    .auth-links {
+        position: fixed;
+        top: 75px; /* because navbar fixed-top */
+        right: 12px;
+        z-index: 9999;
+    }
 
-        .navbar-nav .enroll-btn {
-            background-color: #007bff;
-            color: #fff !important;
-            font-weight: 600;
-            border-radius: 20px;
-            padding: 8px 20px;
-        }
+    @media (max-width: 767.98px){
+        .hero h1{ font-size: 2.4rem; }
+    }
+</style>
 
-        html, body { height: 100%; }
-        #app { min-height: 100%; display: flex; flex-direction: column; }
-        main { flex: 1; }
-        footer { border-top: 1px solid rgba(0,0,0,.1); background: #fff; }
-    </style>
-</head>
+<div class="pioneer-page">
 
-<body>
-<div id="app">
+    {{-- Animated BG --}}
+    <div class="animated-bg">
+        <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
+        <div class="blob"></div><div class="blob"></div><div class="blob"></div>
+    </div>
 
-<nav class="navbar navbar-expand-md navbar-light clean-navbar fixed-top shadow-sm">
-    <div class="container">
+    <!-- {{-- Optional Auth Links --}}
+    @if (Route::has('login'))
+        <div class="auth-links">
+            @auth
+                <a href="{{ url('/home') }}" class="text-white fw-semibold me-3 text-decoration-none">Home</a>
+            @else
+                <a href="{{ route('login') }}" class="text-white fw-semibold me-3 text-decoration-none">Login</a>
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}" class="text-white fw-semibold text-decoration-none">Register</a>
+                @endif
+            @endauth
+        </div>
+    @endif -->
 
-        <a href="{{ url('/pioneer') }}">
-            <img src="{{ asset('images/pioneer17.png') }}" width="70">
-        </a>
+    {{-- Hero --}}
+    <section class="hero">
+        <div class="container">
+            <h1>🎓 Pioneer Private School</h1>
+            <p>Shaping the Future with Knowledge & Kindness</p>
+        </div>
+    </section>
 
-        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    {{-- About --}}
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row g-4 text-center">
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <h4>Quality Education</h4>
+                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <p>Providing world-class curriculum with experienced teachers.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <h4>Modern Facilities</h4>
+                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <p>Smart classrooms, science labs, and a creative learning environment.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card p-4 h-100">
+                        <h4>Student Care</h4>
+                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <p>Building confidence and character with personalized guidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {{-- Gallery --}}
+    <section id="gallery" class="py-5 bg-light text-dark">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">📸 School Gallery & 🎥 Video Highlights</h2>
 
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/founder') }}">Founder</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/teachers') }}">Teacher</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/events') }}">Events</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/subject') }}">Subjects</a></li>
+            <div class="row g-4">
+                @php
+                    $photos = [
+                        ['pioneer3.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
+                        ['pioneer4.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
+                        ['pioneer5.jpg','Sports Day','A day filled with energy and friendly competition.'],
+                        ['pioneer6.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
+                        ['pioneer7.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
+                        ['pioneer8.jpg','Sports Day','A day filled with energy and friendly competition.'],
+                        ['pioneer9.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
+                        ['pioneer21.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
+                        ['pioneer16.jpg','Sports Day','A day filled with energy and friendly competition.'],
+                        ['pioneer17.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
+                        ['pioneer22.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
+                        ['pioneer18.jpg','Sports Day','A day filled with energy and friendly competition.'],
+                    ];
+                @endphp
 
-                @auth
-                    @if(Auth::user()->name === 'Admin')
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admin Menu</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.teachers.index') }}">Teachers</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.subjects.index') }}">Subjects</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.events.index') }}">Events</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.promotions.index') }}">Student Promotion</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.exam-results.create') }}">Exam Result</a></li>
-                            </ul>
-                        </li>
-                    @endif
-                @endauth
-
-                <li class="nav-item">
-                    <a class="nav-link enroll-btn" href="{{ route('enroll.form') }}">Enroll Now</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav ms-auto">
-                @guest
-                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
+                @foreach($photos as $item)
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 shadow-sm">
+                            <img src="{{ asset('images/'.$item[0]) }}" class="card-img-top" alt="{{ $item[1] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item[1] }}</h5>
+                                <p class="card-text">{{ $item[2] }}</p>
+                            </div>
                         </div>
-                    </li>
-                @endguest
-            </ul>
+                    </div>
+                @endforeach
+            </div>
 
         </div>
-    </div>
-</nav>
-
-<main class="py-4">
-    @yield('content')
-</main>
-@include('layouts.footer')
-
-
+    </section>
 
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection
