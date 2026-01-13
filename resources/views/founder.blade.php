@@ -206,7 +206,7 @@
   </div>
 </section>
 
-  {{-- FOOTER --}}
+  <!-- {{-- FOOTER --}}
   <footer class="section-pad pt-5 pb-4">
     <div class="container">
       <div class="row g-4">
@@ -223,6 +223,6 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
 @endsection

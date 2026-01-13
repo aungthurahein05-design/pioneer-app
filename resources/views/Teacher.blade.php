@@ -146,6 +146,7 @@
 
     {{-- Grid --}}
     <div class="teacher-grid">
+      
       @forelse($teachers as $teacher)
         @php
           $photo = $teacher->photo
@@ -203,28 +204,7 @@
   </div>
 </section>
 
-{{-- FOOTER --}}
-<footer class="pt-5 pb-4">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-md-6">
-        <h5 class="fw-bold">Pioneer School</h5>
-        <p class="text-muted mb-2">No. 123, University Avenue, Yangon</p>
-        <p class="text-muted mb-0">
-          Phone: <a href="tel:+95900000000">+95 9 000 000 00</a> ·
-          Email: <a href="mailto:info@pioneerschool.edu">info@pioneerschool.edu</a>
-        </p>
-      </div>
-      <div class="col-md-6 text-md-end">
-        <a href="#" class="me-3"><i class="bi bi-facebook fs-4"></i></a>
-        <a href="#" class="me-3"><i class="bi bi-instagram fs-4"></i></a>
-        <a href="#"><i class="bi bi-youtube fs-4"></i></a>
-        <div class="text-muted small mt-2">© {{ now()->year }} Pioneer School. All rights reserved.</div>
-      </div>
-    </div>
-  </div>
-</footer>
-@endsection
+
 
 @push('scripts')
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -232,3 +212,4 @@
     AOS.init({ duration: 800, once: true, offset: 80 });
   </script>
 @endpush
+

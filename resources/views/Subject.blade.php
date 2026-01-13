@@ -190,7 +190,7 @@
 
 </div>
 
-{{-- FOOTER --}}
+<!-- {{-- FOOTER --}}
 <footer class="custom-footer pt-5 pb-4 mt-4">
     <div class="container">
         <div class="row g-4">
@@ -210,5 +210,5 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 @endsection
