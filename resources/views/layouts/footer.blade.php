@@ -13,7 +13,7 @@
         <a href="#" class="me-3"><i class="bi bi-facebook fs-4"></i></a>
         <a href="#" class="me-3"><i class="bi bi-instagram fs-4"></i></a>
         <a href="#"><i class="bi bi-youtube fs-4"></i></a>
-        <div class="text-muted small mt-2">© {{ now()->year }} Pioneer School. All rights reserved.</div>
+        <div class="text-muted small mt-2">© {{ now()->year }}  Powered by Aung Thura Hein </div>
       </div>
     </div>
   </div>
