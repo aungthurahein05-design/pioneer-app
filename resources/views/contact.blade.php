@@ -12,142 +12,257 @@
 }
 
 /* Background Animation */
-.contact-bg {
+.contact-bg{
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(120deg, var(--pri), var(--acc), #f5f7fb);
   background-size: 300% 300%;
   animation: contactGradient 10s ease infinite;
-  padding-top: 70px;
-  padding-bottom: 70px;
+  padding-top: 80px;
+  padding-bottom: 80px;
   position: relative;
   overflow: hidden;
 }
 
-@keyframes contactGradient {
+@keyframes contactGradient{
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Optional school pattern background */
-.contact-bg::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url('images/pioneer18.png');
+/* pattern overlay */
+.contact-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: url('{{ asset('images/pioneer18.png') }}');
   background-size: 240px;
   background-repeat: repeat;
-  opacity: 0.14;
+  opacity: .12;
   z-index: 1;
 }
 
-.contact-content {
+.contact-content{
   position: relative;
   z-index: 5;
 }
 
-/* Contact Form Box */
-.contact-box {
-  max-width: 600px;
+/* Main Card */
+.contact-card{
+  max-width: 900px;
   margin: 0 auto;
-  background: rgba(255,255,255,0.88);
-  padding: 30px;
-  border-radius: 14px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(255,255,255,0.35);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+  overflow: hidden;
 }
 
-.contact-box h2 {
+.contact-header{
+  padding: 26px 26px 18px;
   text-align: center;
-  margin-bottom: 25px;
+}
+
+.contact-header h2{
+  margin: 0;
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.contact-header p{
+  margin: 10px 0 0;
+  color: rgba(31,41,55,.75);
+}
+
+/* Info grid */
+.info-grid{
+  padding: 22px 26px 28px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+}
+
+.info-box{
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.info-box:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.14);
+}
+
+.info-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom: 8px;
+  font-weight: 800;
   color: var(--ink);
 }
 
-/* Default Inputs */
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
+.badge-icon{
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(13,110,253,.12);
+  color: var(--pri);
+  font-size: 18px;
+}
+
+.info-text{
+  margin: 0;
+  color: rgba(31,41,55,.80);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.link-list{
+  margin-top: 10px;
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.smart-link{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration: none;
   color: var(--ink);
+  background: rgba(13,110,253,.06);
+  border: 1px solid rgba(13,110,253,.10);
+  transition: .2s ease;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.smart-link:hover{
+  background: rgba(13,110,253,.12);
+  border-color: rgba(13,110,253,.18);
 }
 
-textarea {
-  height: 120px;
+.smart-link span{
+  font-weight: 700;
 }
 
-button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  background-color: var(--pri);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  transition: 0.3s;
+.smart-link small{
+  color: rgba(31,41,55,.65);
+  font-weight: 600;
 }
 
-button[type="submit"]:hover {
-  background-color: #0056b3;
+/* bottom note */
+.contact-note{
+  padding: 0 26px 26px;
+  color: rgba(31,41,55,.78);
+  text-align:center;
 }
-  /* ===== Footer ===== */
-    footer{
-      background: #b6dbe385;
-      border-top: 1px solid rgba(30, 42, 15, 1);
-    }
-    footer a{
-      color: var(--ink);
-    }
-    footer a:hover{
-      color: var(--pri);
-    }
+
+@media (max-width: 991.98px){
+  .info-grid{ grid-template-columns: 1fr; }
+}
+
+/* Footer (optional) */
+footer{
+  background: #b6dbe385;
+  border-top: 1px solid rgba(30, 42, 15, 1);
+}
+footer a{ color: var(--ink); }
+footer a:hover{ color: var(--pri); }
 </style>
 
 <div class="contact-bg">
-    <div class="contact-content">
-        <div class="contact-box">
+  <div class="contact-content container">
 
-            <h2>Contact Us</h2>
+    <div class="contact-card">
+      <div class="contact-header">
+        <h2>Contact & Inquiries</h2>
+        <p>For admissions, fees, and school information — reach us via phone, email, or social media.</p>
+      </div>
 
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+      <div class="info-grid">
 
-            <form method="POST" action="{{ route('contact.store') }}">
-                @csrf
+        {{-- Phone --}}
+        <div class="info-box">
+          <div class="info-title">
+            <div class="badge-icon">📞</div>
+            Phone
+          </div>
+          <p class="info-text">Call us during office hours for quick inquiries.</p>
 
-                <div class="mb-3">
-                    <label>Name</label>
-                    <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                    @error('name')<small class="text-danger">{{ $message }}</small>@enderror
-                </div>
-
-                <div class="mb-3">
-                    <label>Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                    @error('email')<small class="text-danger">{{ $message }}</small>@enderror
-                </div>
-
-                <div class="mb-3">
-                    <label>Message</label>
-                    <textarea name="message" class="form-control">{{ old('message') }}</textarea>
-                    @error('message')<small class="text-danger">{{ $message }}</small>@enderror
-                </div>
-
-                <button type="submit" class="btn btn-primary">Send</button>
-            </form>
-
+          <div class="link-list">
+            <a class="smart-link" href="tel:+959123456789">
+              <span>+95 9 123 456 789</span>
+              <small>Tap to call</small>
+            </a>
+            <a class="smart-link" href="https://wa.me/959123456789" target="_blank" rel="noopener">
+              <span>WhatsApp Chat</span>
+              <small>Open</small>
+            </a>
+          </div>
         </div>
+
+        {{-- Email --}}
+        <div class="info-box">
+          <div class="info-title">
+            <div class="badge-icon">✉️</div>
+            Email
+          </div>
+          <p class="info-text">Send us your questions and we’ll reply as soon as possible.</p>
+
+          <div class="link-list">
+            <a class="smart-link" href="mailto:info@pioneerschool.com?subject=Inquiry%20from%20Website">
+              <span>info@pioneerschool.com</span>
+              <small>Send email</small>
+            </a>
+            <a class="smart-link" href="mailto:admissions@pioneerschool.com?subject=Admissions%20Inquiry">
+              <span>admissions@pioneerschool.com</span>
+              <small>Admissions</small>
+            </a>
+          </div>
+        </div>
+
+        {{-- Social --}}
+        <div class="info-box">
+          <div class="info-title">
+            <div class="badge-icon">🌐</div>
+            Social Media
+          </div>
+          <p class="info-text">Follow updates, events, and announcements.</p>
+
+          <div class="link-list">
+            <a class="smart-link" href="https://www.facebook.com/" target="_blank" rel="noopener">
+              <span>Facebook Page</span>
+              <small>Open</small>
+            </a>
+            <a class="smart-link" href="https://www.messenger.com/" target="_blank" rel="noopener">
+              <span>Messenger</span>
+              <small>Chat</small>
+            </a>
+            <a class="smart-link" href="https://t.me/thura6667" target="_blank" rel="noopener">
+              <span>Telegram</span>
+              <small>Open</small>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="contact-note">
+        <strong>Office Hours:</strong> Mon–Fri (8:00 AM – 4:30 PM) • <strong>Location:</strong> Add your school address here.
+      </div>
     </div>
+
+  </div>
 </div>
-
-
 
 @endsection
