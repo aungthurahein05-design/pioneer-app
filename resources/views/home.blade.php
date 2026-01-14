@@ -274,7 +274,7 @@
 
         <div class="col-lg-5" data-aos="fade-left">
           <div class="bg-white rounded-2xl shadow-soft p-3 card-hover">
-            <img src="{{ asset('images/Pioneer31.jpg') }}" class="w-100 rounded-2" alt="Students">
+            <img src="{{ asset('images/Pioneer5.jpg') }}" class="w-100 rounded-2" alt="Students">
           </div>
         </div>
       </div>
