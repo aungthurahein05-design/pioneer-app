@@ -29,7 +29,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('teaching-assignments', TeachingAssignmentController::class);
 });
 
-
+Route::resource('students', StudentController::class);
 
 Route::get('/', function () {
     return view('welcome');

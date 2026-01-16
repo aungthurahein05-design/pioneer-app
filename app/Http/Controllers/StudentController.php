@@ -2,45 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Models\Classroom;
+use App\Models\Section;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    // Enroll form ပြသဖို့ (optional)
-    public function create()
+    public function index()
     {
-        return view('enroll');   // နင့် blade ဖိုင်နာမည်နဲ့ ကိုက်အောင်
+        $students = Student::all();
+        return view('students.index', compact('students'));
     }
 
-    // ဒီက data ကို DB ထဲသိမ်းမယ့် အဓိကပိုင်း
+  public function create()
+{
+    $classrooms = Classroom::all();
+    $sections = Section::all();
+
+    return view('students.create', compact('classrooms', 'sections'));
+}
+
     public function store(Request $request)
     {
-        // 1. validation (အလိုမလို ပြင်လို့ရ)
-        $request->validate([
-            'name'        => 'required|string|max:255',
-            'nrc'         => 'required|string|max:255',
-            'gender'      => 'required|in:male,female',
-            'father_name' => 'required|string|max:255',
-            'mother_name' => 'required|string|max:255',
-            'dob'         => 'required|date',
-            'phone'       => 'required|string|max:20',
-            'address'     => 'required|string|max:255',
-        ]);
+        Student::create($request->all());
 
-        // 2. DB ထဲသိမ်း
-        $student = new Student();
-        $student->name        = $request->name;
-        $student->nrc         = $request->nrc;
-        $student->gender      = $request->gender;
-        $student->father_name = $request->father_name;
-        $student->mother_name = $request->mother_name;
-        $student->dob         = $request->dob;
-        $student->phone       = $request->phone;
-        $student->address     = $request->address;
-        $student->save();
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Student created successfully');
+    }
 
-        // 3. success message နဲ့ ပြန်သွား
-        return back()->with('success', 'Student enrolled successfully!');
+    public function show(Student $student)
+    {
+        return view('students.show', compact('student'));
+    }
+
+   public function edit(Student $student)
+{
+    $classrooms = Classroom::all();
+    $sections = Section::all();
+
+    return view('students.edit', compact('student', 'classrooms', 'sections'));
+}
+
+    public function update(Request $request, Student $student)
+    {
+        $student->update($request->all());
+
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Student updated successfully');
+    }
+
+    public function destroy(Student $student)
+    {
+        $student->delete();
+
+        return redirect()
+            ->route('students.index')
+            ->with('success', 'Student deleted successfully');
     }
 }

@@ -90,6 +90,12 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.promotions.index') }}">Student Promotion</a></li>
                                 <li><a class="dropdown-item" href="{{ route('admin.exam-results.create') }}">Exam Result</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.classrooms.create') }}">Classroom</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.sections.create') }}">Section</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('students.index') }}">Student</a>
+                                </li>
+
                             </ul>
                         </li>
                     @endif
