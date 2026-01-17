@@ -98,7 +98,7 @@
                         aria-expanded="false">
 
                             <i class="bi bi-person-circle me-1"></i>
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->name}}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end shadow-sm"
@@ -106,7 +106,7 @@
 
                             {{-- Admin Dashboard --}}
                             <a class="dropdown-item d-flex align-items-center gap-2"
-                            href="{{ url('admin/dashboard') }}">
+                            href="{{ url('/admin/dashboard') }}">
                                 <i class="bi bi-speedometer2"></i>
                                 Admin Dashboard
                             </a>

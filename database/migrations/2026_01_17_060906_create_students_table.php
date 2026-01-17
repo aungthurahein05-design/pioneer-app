@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
         $table->id();
+        
         $table->string('student_code')->unique();
         $table->string('name');
         $table->string('gender')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
         $table->string('status')->default('active');
         $table->string('photo')->nullable();
         $table->text('remarks')->nullable();
+
         $table->timestamps();
 });
 

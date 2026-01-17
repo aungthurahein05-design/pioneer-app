@@ -32,6 +32,7 @@ Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name
 
 
 
+
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::resource('classrooms', ClassroomController::class);
     Route::resource('sections', SectionController::class);
