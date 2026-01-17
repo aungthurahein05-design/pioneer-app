@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
 <div class="container py-4">
@@ -15,8 +15,7 @@
         </div>
     @endif
 
-    <form action="{{ route('students.update', $student->id) }}"
-          method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -39,14 +38,8 @@
             <label class="form-label">Gender</label>
             <select name="gender" class="form-select">
                 <option value="">Select Gender</option>
-                <option value="male"
-                    {{ old('gender', $student->gender) == 'male' ? 'selected' : '' }}>
-                    Male
-                </option>
-                <option value="female"
-                    {{ old('gender', $student->gender) == 'female' ? 'selected' : '' }}>
-                    Female
-                </option>
+                <option value="male" {{ old('gender', $student->gender) == 'male' ? 'selected' : '' }}>Male</option>
+                <option value="female" {{ old('gender', $student->gender) == 'female' ? 'selected' : '' }}>Female</option>
             </select>
         </div>
 
@@ -95,7 +88,7 @@
         {{-- Roll Number --}}
         <div class="mb-3">
             <label class="form-label">Roll Number</label>
-            <input type="number" name="roll_number" class="form-control"
+            <input type="text" name="roll_number" class="form-control"
                    value="{{ old('roll_number', $student->roll_number) }}">
         </div>
 
@@ -121,8 +114,7 @@
         {{-- Address --}}
         <div class="mb-3">
             <label class="form-label">Address</label>
-            <textarea name="address" class="form-control"
-                      rows="3">{{ old('address', $student->address) }}</textarea>
+            <textarea name="address" class="form-control" rows="3">{{ old('address', $student->address) }}</textarea>
         </div>
 
         {{-- Contact --}}
@@ -142,25 +134,21 @@
         <div class="mb-3">
             <label class="form-label">Status</label>
             <select name="status" class="form-select">
-                <option value="active"
-                    {{ old('status', $student->status) == 'active' ? 'selected' : '' }}>
-                    Active
-                </option>
-                <option value="inactive"
-                    {{ old('status', $student->status) == 'inactive' ? 'selected' : '' }}>
-                    Inactive
-                </option>
+                <option value="active" {{ old('status', $student->status) == 'active' ? 'selected' : '' }}>Active</option>
+                <option value="inactive" {{ old('status', $student->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
             </select>
         </div>
 
         {{-- Photo --}}
         <div class="mb-3">
             <label class="form-label">Photo</label><br>
+
             @if($student->photo)
-    <img src="{{ asset('storage/' . $student->photo) }}"
-         alt="{{ $student->name }}"
-         style="width:70px; height:70px; object-fit:cover; border-radius:50%; margin-bottom:10px;">
-@endif
+                <img src="{{ asset('storage/' . $student->photo) }}"
+                     alt="{{ $student->name }}"
+                     style="width:70px; height:70px; object-fit:cover; border-radius:50%; margin-bottom:10px;">
+            @endif
+
             <input type="file" name="photo" class="form-control" accept="image/*">
             <small class="text-muted">
                 If you don't choose a new photo, the old one will remain.
@@ -170,13 +158,19 @@
         {{-- Remarks --}}
         <div class="mb-3">
             <label class="form-label">Remarks</label>
-            <textarea name="remarks" class="form-control"
-                      rows="3">{{ old('remarks', $student->remarks) }}</textarea>
+            <textarea name="remarks" class="form-control" rows="3">{{ old('remarks', $student->remarks) }}</textarea>
         </div>
 
         {{-- Buttons --}}
-        <button type="submit" class="btn btn-primary">Update</button>
-        <a href="{{ route('students.index') }}" class="btn btn-secondary">Cancel</a>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-save2 me-1"></i> Update
+            </button>
+
+            <a href="{{ route('admin.students.index') }}" class="btn btn-secondary">
+                <i class="bi bi-x-circle me-1"></i> Cancel
+            </a>
+        </div>
 
     </form>
 </div>

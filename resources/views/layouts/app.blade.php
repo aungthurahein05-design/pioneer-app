@@ -72,38 +72,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mx-auto">
+                
                 <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/founder') }}">Founder</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/teachers') }}">Teacher</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/events') }}">Events</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/subject') }}">Subjects</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/events') }}">Events</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link enroll-btn" href="{{ route('enroll.form') }}">Enroll Now</a></li>
 
-                @auth
-                    @if(Auth::user()->name === 'Admin')
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Admin Menu</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.teachers.index') }}">Teachers</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.subjects.index') }}">Subjects</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.events.index') }}">Events</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.promotions.index') }}">Student Promotion</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.exam-results.create') }}">Exam Result</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.classrooms.create') }}">Classroom</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.sections.create') }}">Section</a></li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('students.index') }}">Student</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    @endif
-                @endauth
-
-                <li class="nav-item">
-                    <a class="nav-link enroll-btn" href="{{ route('enroll.form') }}">Enroll Now</a>
-                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">
@@ -112,19 +89,45 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                 @else
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+
+                        <a class="nav-link dropdown-toggle user-dropdown"
+                        href="#"
+                        id="navbarUserDropdown"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                            <i class="bi bi-person-circle me-1"></i>
                             {{ Auth::user()->name }}
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+
+                        <div class="dropdown-menu dropdown-menu-end shadow-sm"
+                            aria-labelledby="navbarUserDropdown">
+
+                            {{-- Admin Dashboard --}}
+                            <a class="dropdown-item d-flex align-items-center gap-2"
+                            href="{{ url('admin/dashboard') }}">
+                                <i class="bi bi-speedometer2"></i>
+                                Admin Dashboard
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+
+                            {{-- Logout --}}
+                            <a class="dropdown-item d-flex align-items-center gap-2 text-danger"
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="bi bi-box-arrow-right"></i>
                                 Logout
                             </a>
+
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+
                         </div>
                     </li>
+
                 @endguest
             </ul>
 

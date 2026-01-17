@@ -7,20 +7,29 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\EnrollController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\StudentController;
+
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\Admin\ExamResultController as AdminExamResultController;
+
 use App\Http\Controllers\ExamResultController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AttendanceController;
 
 use App\Http\Controllers\Admin\ClassroomController;
-
+use App\Http\Controllers\Admin\ExamResultController as AdminExamResultController;
 use App\Http\Controllers\Admin\SectionController;
-use App\Http\Controllers\Admini\App\Http\Controllers\Admin\TeachingAssignmentController;
+use App\Http\Controllers\Admin\TeachingAssignmentController;
 
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\StudentSubjectController;
+
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\StudentController;
+
+
+
+//Testing
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -29,7 +38,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('teaching-assignments', TeachingAssignmentController::class);
 });
 
-Route::resource('students', StudentController::class);
+// Admin
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+        Route::resource('students', StudentController::class);
+});
 
 Route::get('/', function () {
     return view('welcome');
@@ -161,12 +173,16 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
 // Public/User
-Route::get('/exam-results', [ExamResultController::class, 'publicIndex'])
-    ->name('exam-results.public');
+Route::get('/exam-results', [ExamResultController::class, 'publicIndex'])->name('exam-results.public');
+
+ 
 
 // Admin
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    Route::resource('exam-results', ExamResultController::class);});
+
+        Route::resource('exam-results', ExamResultController::class);
+});
+
 
  
 Route::get('/attendance', [AttendanceController::class, 'index'])
