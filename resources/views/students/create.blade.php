@@ -124,7 +124,7 @@
 <div class="mb-3">
     <label class="form-label">Photo</label>
     <input type="file" name="photo" class="form-control"
-           accept="image/*"
+           accept="images/*"
            onchange="previewImage(event)">
     <img id="preview" style="display:none; width:70px; margin-top:10px;">
 </div>

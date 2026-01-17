@@ -13,6 +13,8 @@ class Classroom extends Model
         return $this->hasMany(Section::class);
     }
 
+
+
     public function teachingAssignments()
     {
         return $this->hasMany(TeachingAssignment::class);

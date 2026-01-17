@@ -57,7 +57,7 @@
                         <td>{{ $student->phone ?? '-' }}</td>
                         <td>
                             @if($student->photo)
-                                <img src="{{ asset('storage/' . $student->photo) }}"
+                                <img src="{{ asset('images/' . $student->photo) }}"
                                     style="width:40px; height:40px; object-fit:cover; border-radius:50%;">
                             @else
                                 -
