@@ -87,31 +87,29 @@
                 @guest
                     <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                @else
+             @else
                     <li class="nav-item dropdown">
-
                         <a class="nav-link dropdown-toggle user-dropdown"
                         href="#"
                         id="navbarUserDropdown"
                         role="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                        data-bs-toggle="dropdown">
 
                             <i class="bi bi-person-circle me-1"></i>
-                            {{ Auth::user()->name}}
+                            {{ Auth::user()->name }}
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-end shadow-sm"
-                            aria-labelledby="navbarUserDropdown">
+                        <div class="dropdown-menu dropdown-menu-end shadow-sm">
 
-                            {{-- Admin Dashboard --}}
-                            <a class="dropdown-item d-flex align-items-center gap-2"
-                            href="{{ url('/admin/dashboard') }}">
-                                <i class="bi bi-speedometer2"></i>
-                                Admin Dashboard
-                            </a>
-
-                            <div class="dropdown-divider"></div>
+                            {{-- Admin only --}}
+                            @if(Auth::user()->email === 'admin12@gmail.com')
+                                <a class="dropdown-item d-flex align-items-center gap-2"
+                                href="{{ url('/admin/dashboard') }}">
+                                    <i class="bi bi-speedometer2"></i>
+                                    Admin Dashboard
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            @endif
 
                             {{-- Logout --}}
                             <a class="dropdown-item d-flex align-items-center gap-2 text-danger"
@@ -127,8 +125,8 @@
 
                         </div>
                     </li>
+                    @endguest
 
-                @endguest
             </ul>
 
         </div>
