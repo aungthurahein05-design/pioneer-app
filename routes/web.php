@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ResultController;
-use App\Http\Controllers\EnrollController;
+
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 
@@ -24,8 +24,7 @@ use App\Http\Controllers\Admin\StudentSubjectController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\StudentController;
-
-
+use App\Http\Controllers\Admin\EnrollController;
 
 //Testing
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -222,6 +221,38 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
 
+
+// Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
+//     Route::get('users/{user}/users', [RegisterController::class, 'index'])->name('users.users.index');
+//     Route::get('/users/create', [RegisterController::class, 'create'])->name('users.create');
+//     Route::get('/users/edit', [RegisterController::class, 'edit'])->name('users.edit');
+    
+
+// });
+
+
+
+use App\Http\Controllers\Admin\RegisterController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('users', [RegisterController::class, 'index'])
+        ->name('admin.users.index');
+});
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
+    // Enrollment routes
+    Route::get('enroll', [EnrollController::class, 'index'])->name('enroll.index');       // List all enrollments
+    Route::get('enroll/create', [EnrollController::class, 'create'])->name('enroll.create'); // Show create form
+    Route::post('enroll', [EnrollController::class, 'store'])->name('enroll.store');      // Store new enrollment
+    Route::get('enroll/{enroll}/edit', [EnrollController::class, 'edit'])->name('enroll.edit'); // Show edit form
+    Route::put('enroll/{enroll}', [EnrollController::class, 'update'])->name('enroll.update');  // Update enrollment
+    Route::delete('enroll/{enroll}', [EnrollController::class, 'destroy'])->name('enroll.destroy'); // Delete enrollment
+    Route::get('enroll/{enroll}', [EnrollController::class, 'show'])->name('enroll.show'); // Show single enrollment details
+
+});
 
 
 

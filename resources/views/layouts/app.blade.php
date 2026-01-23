@@ -102,7 +102,7 @@
                         <div class="dropdown-menu dropdown-menu-end shadow-sm">
 
                             {{-- Admin only --}}
-                            @if(Auth::user()->email === 'admin12@gmail.com')
+                          @if(Auth::user()->role === 'admin')
                                 <a class="dropdown-item d-flex align-items-center gap-2"
                                 href="{{ url('/admin/dashboard') }}">
                                     <i class="bi bi-speedometer2"></i>
@@ -110,6 +110,7 @@
                                 </a>
                                 <div class="dropdown-divider"></div>
                             @endif
+
 
                             {{-- Logout --}}
                             <a class="dropdown-item d-flex align-items-center gap-2 text-danger"

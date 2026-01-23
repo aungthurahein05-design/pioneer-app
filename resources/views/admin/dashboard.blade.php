@@ -30,6 +30,10 @@
 
                         <div class="d-flex flex-wrap gap-2">
 
+                            <a href="{{ route('admin.users.index') }}" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-buildings me-1"></i>
+                                Users
+                            </a>
                             <a href="{{ route('admin.teachers.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Teachers
@@ -69,7 +73,10 @@
                                 <i class="bi bi-buildings me-1"></i>
                                 Student
                             </a>
-
+                            <a href="{{ route('admin.enroll.index') }}" class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-buildings me-1"></i>
+                                Enroll
+                            </a>
 
 
                             
