@@ -9,6 +9,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\RegisterController;
 
 use App\Http\Controllers\ExamResultController;
 use App\Http\Controllers\EventController;
@@ -233,12 +234,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
 
-use App\Http\Controllers\Admin\RegisterController;
 
-Route::prefix('admin')->group(function () {
-    Route::get('users', [RegisterController::class, 'index'])
-        ->name('admin.users.index');
-});
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
