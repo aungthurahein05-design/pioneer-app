@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-   
     public function index()
     {
         $teachers = Teacher::latest()->paginate(10);
@@ -29,14 +28,16 @@ class TeacherController extends Controller
             'photo'     => 'nullable|image|max:2048',
         ]);
 
-        // photo upload
+        // ✅ Save photo to: public/images/teachers/
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('teachers', 'public');
-        }
+            $file = $request->file('photo');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
 
-        // ensure key exists (helps when DB expects it)
-        $validated['education'] = $validated['education'] ?? null;
-        $validated['phone']     = $validated['phone'] ?? null;
+            $file->move(public_path('images/teachers'), $filename);
+
+            // ✅ store filename only in DB
+            $validated['photo'] = $filename;
+        }
 
         Teacher::create($validated);
 
@@ -59,12 +60,24 @@ class TeacherController extends Controller
             'photo'     => 'nullable|image|max:2048',
         ]);
 
+        // ✅ If new photo uploaded: delete old + save new to public/images/teachers/
         if ($request->hasFile('photo')) {
-            $validated['photo'] = $request->file('photo')->store('teachers', 'public');
-        }
 
-        $validated['education'] = $validated['education'] ?? null;
-        $validated['phone']     = $validated['phone'] ?? null;
+            // delete old file if exists
+            if (!empty($teacher->photo)) {
+                $oldPath = public_path('images/teachers/' . $teacher->photo);
+                if (file_exists($oldPath)) {
+                    @unlink($oldPath);
+                }
+            }
+
+            $file = $request->file('photo');
+            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+
+            $file->move(public_path('images/teachers'), $filename);
+
+            $validated['photo'] = $filename; // filename only
+        }
 
         $teacher->update($validated);
 
@@ -74,6 +87,14 @@ class TeacherController extends Controller
 
     public function destroy(Teacher $teacher)
     {
+        // ✅ delete photo file too
+        if (!empty($teacher->photo)) {
+            $path = public_path('images/teachers/' . $teacher->photo);
+            if (file_exists($path)) {
+                @unlink($path);
+            }
+        }
+
         $teacher->delete();
 
         return redirect()->route('admin.teachers.index')
@@ -86,22 +107,4 @@ class TeacherController extends Controller
         $teachers = Teacher::latest()->get();
         return view('teacher', compact('teachers'));
     }
-
-     // ---------- Frontend old form (optional) ----------
-    public function showForm()
-    {
-        return view('teacher');
-    }
-
-    public function submitForm(Request $request)
-    {
-        $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email',
-            'subject' => 'required|string',
-        ]);
-
-        return back()->with('success', 'Teacher submitted successfully!');
-    }
-
 }

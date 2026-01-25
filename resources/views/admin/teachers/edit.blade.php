@@ -41,17 +41,23 @@
             <input type="text" name="education" class="form-control"
                    value="{{ old('education', $teacher->education) }}">
         </div>
+<div class="mb-3">
+    <label class="form-label">Photo</label><br>
 
-        <div class="mb-3">
-            <label class="form-label">Photo</label><br>
-            @if($teacher->photo)
-                <img src="{{ asset('storage/' . $teacher->photo) }}"
-                     alt="{{ $teacher->name }}"
-                     style="width:70px; height:70px; object-fit:cover; border-radius:50%; margin-bottom:10px;">
-            @endif
-            <input type="file" name="photo" class="form-control" accept="image/*">
-            <small class="text-muted">If you don't choose new photo, old one will keep.</small>
-        </div>
+    @php
+        $img = !empty($teacher->photo)
+            ? asset('images/teachers/' . $teacher->photo)
+            : asset('images/default-teacher.png');
+    @endphp
+
+    <img src="{{ $img }}"
+         alt="{{ $teacher->name }}"
+         style="width:70px; height:70px; object-fit:cover; border-radius:50%; margin-bottom:10px;">
+
+    <input type="file" name="photo" class="form-control" accept="image/*">
+    <small class="text-muted">If you don't choose new photo, old one will keep.</small>
+</div>
+
 
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('admin.teachers.index') }}" class="btn btn-secondary">Cancel</a>

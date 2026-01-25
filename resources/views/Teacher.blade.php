@@ -147,56 +147,53 @@
     {{-- Grid --}}
     <div class="teacher-grid">
       
-      @forelse($teachers as $teacher)
-        @php
-          $photo = $teacher->photo
-              ? asset('uploads/teachers/'.$teacher->photo)
-              : asset('images/default-teacher.png'); // create default image or change path
+    @forelse($teachers as $teacher)
+  @php
+      $photo = !empty($teacher->photo)
+          ? asset('images/teachers/' . $teacher->photo)      // ✅ FIX (plural)
+          : asset('images/default-teacher.png');             // ✅ FIX (plural)
 
-          $name = $teacher->name ?? 'Teacher';
-          $edu  = $teacher->education ?? '—';
-          $phone = $teacher->phone ?? null;
-          $position = $teacher->position ?? null; // if you have this column
-        @endphp
+      $name     = $teacher->name ?? 'Teacher';
+      $edu      = $teacher->education ?? '—';
+      $phone    = $teacher->phone ?? null;
+      $position = $teacher->position ?? 'Teacher';
+  @endphp
 
-        <div class="teacher-card" data-aos="zoom-in">
-          <div class="teacher-photo">
-            <img src="{{ $photo }}" alt="{{ $name }}">
-            <span class="teacher-badge">{{ $position ?? 'Teacher' }}</span>
-          </div>
+  <div class="teacher-card" data-aos="zoom-in">
+    <div class="teacher-photo">
+      <img src="{{ $photo }}" alt="{{ e($name) }}" loading="lazy">
+      <span class="teacher-badge">{{ $position }}</span>
+    </div>
 
-          <div class="teacher-body">
-            <div class="teacher-name">{{ $name }}</div>
-            <div class="teacher-role">{{ $edu }}</div>
+    <div class="teacher-body">
+      <div class="teacher-name">{{ $name }}</div>
+      <div class="teacher-role">{{ $edu }}</div>
 
-            <div class="teacher-meta">
-              @if($phone)
-                📞 {{ $phone }}
-              @else
-                📞 Not provided
-              @endif
-            </div>
+      <div class="teacher-meta">
+        📞 {{ $phone ?: 'Not provided' }}
+      </div>
 
-            <div class="tag-list">
-              <span class="tag-pill">Friendly</span>
-              <span class="tag-pill">Experienced</span>
-              <span class="tag-pill">Supportive</span>
-            </div>
-          </div>
+      <div class="tag-list">
+        <span class="tag-pill">Friendly</span>
+        <span class="tag-pill">Experienced</span>
+        <span class="tag-pill">Supportive</span>
+      </div>
+    </div>
 
-          <div class="teacher-footer">
-            <span>Available</span>
-            <span class="text-primary fw-semibold">View</span>
-          </div>
-        </div>
-      @empty
-        <div class="w-100">
-          <div class="border rounded-4 p-5 text-center bg-white">
-            <h5 class="fw-bold mb-2">No teachers found</h5>
-            <p class="muted mb-0">Please check back later.</p>
-          </div>
-        </div>
-      @endforelse
+    <div class="teacher-footer">
+      <span>Available</span>
+      <span class="text-primary fw-semibold">View</span>
+    </div>
+  </div>
+@empty
+  <div class="w-100">
+    <div class="border rounded-4 p-5 text-center bg-white">
+      <h5 class="fw-bold mb-2">No teachers found</h5>
+      <p class="muted mb-0">Please check back later.</p>
+    </div>
+  </div>
+@endforelse
+
     </div>
 
     

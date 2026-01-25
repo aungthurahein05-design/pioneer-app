@@ -12,44 +12,51 @@
         <a href="{{ route('admin.teachers.create') }}" class="btn btn-primary">+ Add Teacher</a>
     </div>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped align-middle">
         <thead>
             <tr>
-                <th>#</th>
-                <th>Photo</th>
+                <th width="60">#</th>
+                <th width="90">Photo</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Education</th>
-                <th width="150">Action</th>
+                <th width="170">Action</th>
             </tr>
         </thead>
         <tbody>
         @forelse($teachers as $index => $teacher)
+            @php
+                $img = !empty($teacher->photo)
+                    ? asset('images/teachers/' . $teacher->photo)   // ✅ FIX
+                    : asset('images/default-teacher.png');
+            @endphp
+
             <tr>
                 <td>{{ $teachers->firstItem() + $index }}</td>
+
                 <td>
-                    @if($teacher->photo)
-                        <img src="{{ asset('storage/' . $teacher->photo) }}"
-                             alt="{{ $teacher->name }}"
-                             style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
-                    @endif
+                    <img src="{{ $img }}"
+                         alt="{{ $teacher->name }}"
+                         style="width:50px; height:50px; object-fit:cover; border-radius:50%;">
                 </td>
+
                 <td>{{ $teacher->name }}</td>
                 <td>{{ $teacher->email }}</td>
-                <td>{{ $teacher->phone }}</td>
-                <td>{{ $teacher->education }}</td>
+                <td>{{ $teacher->phone ?? '-' }}</td>
+                <td>{{ $teacher->education ?? '-' }}</td>
+
                 <td>
                     <a href="{{ route('admin.teachers.edit', $teacher->id) }}"
                        class="btn btn-sm btn-warning">Edit</a>
 
                     <form action="{{ route('admin.teachers.destroy', $teacher->id) }}"
                           method="POST"
-                          style="display:inline-block"
+                          class="d-inline"
                           onsubmit="return confirm('Delete this teacher?')">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>

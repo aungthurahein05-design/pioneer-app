@@ -92,7 +92,7 @@
 
 
 
-    
+
 </style>
 
 <div class="container py-4">
@@ -171,7 +171,7 @@
 
                     {{-- IMAGE THUMBNAIL --}}
                     @if(!empty($event->image))
-                        <img src="{{ asset('storage/'.$event->image) }}"
+                        <img src="{{ asset('images/'.$event->image) }}"
                              class="event-cover"
                              alt="event image">
                     @else
@@ -243,7 +243,7 @@
                             {{-- IMAGE FULL --}}
                             @if(!empty($event->image))
                                 <div class="mb-3">
-                                    <img src="{{ asset('storage/'.$event->image) }}"
+                                    <img src="{{ asset('images/'.$event->image) }}"
                                          class="img-fluid rounded-3 w-100"
                                          style="max-height:380px; object-fit:cover;"
                                          alt="event image">

@@ -41,13 +41,33 @@
                    value="{{ old('education') }}">
         </div>
 
+        {{-- Photo --}}
         <div class="mb-3">
             <label class="form-label">Photo</label>
-            <input type="file" name="photo" class="form-control" accept="image/*">
+
+            {{-- optional preview --}}
+            <div class="mb-2">
+                <img id="preview"
+                     src="{{ asset('images/default-teacher.png') }}"
+                     style="width:70px;height:70px;object-fit:cover;border-radius:50%;">
+            </div>
+
+            <input type="file" name="photo" class="form-control"
+                   accept="image/*" onchange="previewImage(event)">
+            <small class="text-muted">
+                JPG / PNG only • Saved to <code>public/images/teachers/</code>
+            </small>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="{{ route('admin.teachers.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+
+<script>
+function previewImage(e){
+    const img = document.getElementById('preview');
+    img.src = URL.createObjectURL(e.target.files[0]);
+}
+</script>
 @endsection

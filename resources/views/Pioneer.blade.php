@@ -55,7 +55,7 @@
     100% { transform: translate(0,0) scale(1); }
 }
 
-/* ========= HERO (more pro) ========= */
+/* ========= HERO ========= */
 .hero{
     min-height: 100vh;
     background-image:
@@ -72,10 +72,7 @@
 
     padding: 80px 16px;
 }
-
-.hero .container{
-    max-width: 860px;
-}
+.hero .container{ max-width: 860px; }
 
 .hero h1{
     color:#fff;
@@ -85,7 +82,6 @@
     text-shadow: 0 10px 30px rgba(0,0,0,.55);
     animation: fadeDown .9s ease both;
 }
-
 .hero p{
     color: rgba(255,255,255,.92);
     font-size: clamp(1rem, 1.4vw, 1.25rem);
@@ -94,31 +90,8 @@
     text-shadow: 0 10px 25px rgba(0,0,0,.35);
     animation: fadeUp .9s ease .1s both;
 }
-
-/* optional: small badge under hero text */
-.hero .hero-badge{
-    display:inline-flex;
-    gap:10px;
-    align-items:center;
-    margin-top: 16px;
-    padding: 10px 16px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(10px);
-    color: #fff;
-    font-weight: 600;
-}
-
-/* animations */
-@keyframes fadeDown{
-    from { transform: translateY(-18px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
-}
-@keyframes fadeUp{
-    from { transform: translateY(18px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
-}
+@keyframes fadeDown{ from { transform: translateY(-18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes fadeUp{ from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
 /* ========= About / Cards ========= */
 #about{
@@ -157,13 +130,16 @@
     margin: 0;
 }
 
+/* ✅ Bigger + full image */
 .glass-card img{
     width: 100%;
-    height: 220px;          /* ✅ same height for all */
-    object-fit: cover;      /* ✅ crop nicely */
+    height: 260px;
+    object-fit: contain;
+    background: rgba(255,255,255,0.08);
     border-radius: 14px;
     border: 1px solid rgba(255,255,255,0.12);
     margin-bottom: 14px;
+    padding: 6px;
 }
 
 /* ========= Gallery ========= */
@@ -191,48 +167,32 @@
     box-shadow: 0 18px 40px rgba(0,0,0,.25);
 }
 
+/* ✅ Bigger + full image */
 #gallery .card-img-top{
-    height: 220px;
-    object-fit: cover;
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    background: #fff;
+    padding: 6px;
+    display: block;
 }
 
 #gallery .card-title{
     font-weight: 700;
     margin-bottom: 8px;
 }
-
 #gallery .card-text{
     color: #334155;
     line-height: 1.6;
 }
 
-/* ========= Auth links ========= */
-.auth-links{
-    position: fixed;
-    top: 75px;
-    right: 12px;
-    z-index: 9999;
-}
-.auth-links a{
-    padding: 8px 14px;
-    border-radius: 999px;
-    background: rgba(0,0,0,.25);
-    border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(8px);
-    transition: .2s;
-}
-.auth-links a:hover{
-    background: rgba(0,0,0,.35);
-}
-
 /* ========= Mobile ========= */
 @media (max-width: 767.98px){
     .hero{ min-height: 92vh; }
-    .glass-card img{ height: 200px; }
-    #gallery .card-img-top{ height: 200px; }
+    .glass-card img{ height: 230px; }
+    #gallery .card-img-top{ height: 230px; }
 }
 </style>
-
 
 <div class="pioneer-page">
 
@@ -241,20 +201,6 @@
         <div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div><div class="shape"></div>
         <div class="blob"></div><div class="blob"></div><div class="blob"></div>
     </div>
-
-    <!-- {{-- Optional Auth Links --}}
-    @if (Route::has('login'))
-        <div class="auth-links">
-            @auth
-                <a href="{{ url('/home') }}" class="text-white fw-semibold me-3 text-decoration-none">Home</a>
-            @else
-                <a href="{{ route('login') }}" class="text-white fw-semibold me-3 text-decoration-none">Login</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="text-white fw-semibold text-decoration-none">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif -->
 
     {{-- Hero --}}
     <section class="hero">
@@ -271,21 +217,23 @@
                 <div class="col-md-4">
                     <div class="glass-card p-4 h-100">
                         <h4>Quality Education</h4>
-                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="Quality Education">
                         <p>Providing world-class curriculum with experienced teachers.</p>
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <div class="glass-card p-4 h-100">
                         <h4>Modern Facilities</h4>
-                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <img src="{{ asset('images/pioneer4.jpg') }}" alt="Modern Facilities">
                         <p>Smart classrooms, science labs, and a creative learning environment.</p>
                     </div>
                 </div>
+
                 <div class="col-md-4">
                     <div class="glass-card p-4 h-100">
                         <h4>Student Care</h4>
-                        <img src="{{ asset('images/pioneer6.jpg') }}" alt="school" class="mb-3">
+                        <img src="{{ asset('images/pioneer5.jpg') }}" alt="Student Care">
                         <p>Building confidence and character with personalized guidance.</p>
                     </div>
                 </div>
