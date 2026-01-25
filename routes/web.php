@@ -25,7 +25,12 @@ use App\Http\Controllers\Admin\StudentSubjectController;
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\StudentController;
-use App\Http\Controllers\Admin\EnrollController;
+
+
+use App\Http\Controllers\Admin\EnrollController as AdminEnroll;
+use App\Http\Controllers\User\EnrollController as UserEnroll;
+
+
 
 //Testing
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
@@ -58,7 +63,7 @@ Route::get('/home', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -96,18 +101,25 @@ Route::prefix('admin')->group(function () {
 Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
 Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
 
-Route::get('/enroll', [EnrollController::class, 'showForm'])->name('enroll.form');
-Route::post('/enroll', [EnrollController::class, 'submitForm'])->name('enroll.submit');
-Route::post('/enroll', [EnrollController::class, 'store'])->name('students.store');
+//User Enroll
+// show form
+Route::get('/enroll', [UserEnroll::class, 'showForm'])
+    ->name('enroll.form');
+
+// confirm page (POST from form)
+Route::post('/enroll/confirm', [UserEnroll::class, 'submitForm'])
+    ->name('enroll.submit');
+
+// final save to DB
+Route::post('/enroll/store', [UserEnroll::class, 'store'])
+    ->name('enroll.store');
+
 
 
 
 Route::get('/teacher', [TeacherController::class, 'showForm'])->name('teacher.form');
 Route::post('/teacher', [TeacherController::class, 'submitForm'])->name('teacher.submit');
 
-
-Route::get('/enroll', [EnrollController::class, 'showForm'])->name('enroll.form');
-Route::post('/enroll', [EnrollController::class, 'submitForm'])->name('enroll.submit');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('admissions.apply');
 Route::get('/gallery', [GalleryController::class, 'index']);
@@ -176,7 +188,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 // Public/User
 Route::get('/exam-results', [ExamResultController::class, 'publicIndex'])->name('exam-results.public');
 
- 
+
 
 // Admin
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -185,7 +197,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 });
 
 
- 
+
 Route::get('/attendance', [AttendanceController::class, 'index'])
     ->name('attendance.index');
 
@@ -228,7 +240,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 //     Route::get('users/{user}/users', [RegisterController::class, 'index'])->name('users.users.index');
 //     Route::get('/users/create', [RegisterController::class, 'create'])->name('users.create');
 //     Route::get('/users/edit', [RegisterController::class, 'edit'])->name('users.edit');
-    
+
 
 // });
 
@@ -240,13 +252,13 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
     // Enrollment routes
-    Route::get('enroll', [EnrollController::class, 'index'])->name('enroll.index');       // List all enrollments
-    Route::get('enroll/create', [EnrollController::class, 'create'])->name('enroll.create'); // Show create form
-    Route::post('enroll', [EnrollController::class, 'store'])->name('enroll.store');      // Store new enrollment
-    Route::get('enroll/{enroll}/edit', [EnrollController::class, 'edit'])->name('enroll.edit'); // Show edit form
-    Route::put('enroll/{enroll}', [EnrollController::class, 'update'])->name('enroll.update');  // Update enrollment
-    Route::delete('enroll/{enroll}', [EnrollController::class, 'destroy'])->name('enroll.destroy'); // Delete enrollment
-    Route::get('enroll/{enroll}', [EnrollController::class, 'show'])->name('enroll.show'); // Show single enrollment details
+    Route::get('enroll', [AdminEnroll::class, 'index'])->name('enroll.index');       // List all enrollments
+    Route::get('enroll/create', [AdminEnroll::class, 'create'])->name('enroll.create'); // Show create form
+    Route::post('enroll', [AdminEnroll::class, 'store'])->name('enroll.store');      // Store new enrollment
+    Route::get('enroll/{enroll}/edit', [AdminEnroll::class, 'edit'])->name('enroll.edit'); // Show edit form
+    Route::put('enroll/{enroll}', [AdminEnroll::class, 'update'])->name('enroll.update');  // Update enrollment
+    Route::delete('enroll/{enroll}', [AdminEnroll::class, 'destroy'])->name('enroll.destroy'); // Delete enrollment
+    Route::get('enroll/{enroll}', [AdminEnroll::class, 'show'])->name('enroll.show'); // Show single enrollment details
 
 });
 
