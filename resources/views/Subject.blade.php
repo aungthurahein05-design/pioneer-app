@@ -163,9 +163,9 @@
                             </span>
 
                             {{-- Optional button (you can change to your real route later) --}}
-                            <a href="{{ url('/events?subject=' . urlencode($name)) }}"
+                            <a href="{{ url('/teachers?subject=' . urlencode($name)) }}"
                                class="btn btn-outline-primary btn-sm">
-                                View Events
+                             View 
                             </a>
                         </div>
                     </div>
