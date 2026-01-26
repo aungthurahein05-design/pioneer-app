@@ -357,7 +357,7 @@
 @endsection
 
 @push('scripts')
-  {{-- AOS already used on home page ဖြစ်ရင် init တစ်ခါပဲလုံလောက်တယ် --}}
+ 
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({

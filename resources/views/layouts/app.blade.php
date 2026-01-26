@@ -103,14 +103,14 @@
                         <div class="dropdown-menu dropdown-menu-end shadow-sm">
 
                             {{-- Admin only --}}
-                          @if(auth()->user()->email === 'admin12@gmail.com')
+                                @can('dashboard')
                                 <a class="dropdown-item d-flex align-items-center gap-2"
                                 href="{{ url('/admin/dashboard') }}">
                                     <i class="bi bi-speedometer2"></i>
                                     Admin Dashboard
                                 </a>
                                 <div class="dropdown-divider"></div>
-                            @endif
+                                @endcan
 
 
                             {{-- Logout --}}

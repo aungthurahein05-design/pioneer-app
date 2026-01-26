@@ -12,19 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
-    $table->id();
-    $table->unsignedBigInteger('student_id');
-    $table->date('attendance_date');
-    $table->enum('status', ['Present', 'Absent', 'Late', 'Leave']);
-    $table->text('remark')->nullable();
-    $table->timestamps();
 
-    $table->foreign('student_id')
-          ->references('id')->on('students')
-          ->onDelete('cascade');
+        $table->id();
 
-    $table->unique(['student_id', 'attendance_date']);
-});
+       
+
+        $table->timestamps();
+
+        });
     }
 
     /**

@@ -21,6 +21,7 @@
 
             {{-- Master Data Management --}}
             <div class="col-md-10">
+                @role('Admin|Staff|Teacher|Student')
                 <div class="card shadow-sm h-100">
                     <div class="card-header fw-semibold">
                         <i class="bi bi-database-fill-gear me-1"></i>
@@ -30,16 +31,21 @@
 
                         <div class="d-flex flex-wrap gap-2">
 
-                           
-                            <a href="{{ route('admin.teachers.index') }}" class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-buildings me-1"></i>
-                                Teachers
-                            </a>
+                            {{-- Teachers --}}
+                            @can('teacher.view')
+                                <a href="{{ route('admin.teachers.index') }}" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-buildings me-1"></i>
+                                    Teachers
+                                </a>
+                            @endcan
 
+                            {{-- Subjects --}}
+                            @can('subject.view')
                             <a href="{{ route('admin.subjects.index') }}" class="btn btn-outline-primary btn-sm">
-                                <i class="bi bi-buildings me-1"></i>
+                                <i class="bi bi-book me-1"></i>
                                 Subjects
                             </a>
+                            @endcan
 
                              <a href="{{ route('admin.events.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
@@ -84,6 +90,8 @@
 
                     </div>
                 </div>
+                @endrole
+
             </div>
 
         </div>
