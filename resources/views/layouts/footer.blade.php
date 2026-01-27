@@ -5,7 +5,7 @@
         <h5 class="fw-bold">Pioneer School</h5>
         <p class="text-muted mb-2">No. 123, University Avenue, Yangon</p>
         <p class="text-muted mb-0">
-          Phone: <a href="tel:+95900000000">+95 9 000 000 00</a>
+          Phone: <a href="tel:+959794252030">+95 9794252030</a>
           · Email: <a href="mailto:info@pioneerschool.edu">info@pioneerschool.edu</a>
         </p>
       </div>

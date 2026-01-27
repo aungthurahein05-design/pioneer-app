@@ -187,7 +187,7 @@
       pointer-events: none;
       overflow: hidden;
          background-color: #dafcfcff;
-    color: #ffffff;   /* text မျက်နှာမပျောက်အောင် စာရောင်လည်း ဖြူစေလိုက် */
+    color: #ffffff;   
 
     }
 
@@ -401,14 +401,14 @@
             asset('images/pioneer12.jpg'),
             asset('images/pioneer13.jpg'),
             asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
-            asset('images/pioneer14.jpg'),
+            asset('images/pioneer38.jpg'),
+            asset('images/pioneer40.jpg'),
+            asset('images/pioneer40.jpg'),
+            
+            asset('images/pioneer40.jpg'),
+            asset('images/pioneer40.jpg'),
+            asset('images/pioneer40.jpg'),
+            asset('images/pioneer40.jpg'),
           ];
         @endphp
 

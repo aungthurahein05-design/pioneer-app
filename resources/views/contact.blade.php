@@ -200,8 +200,8 @@ footer a:hover{ color: var(--pri); }
           <p class="info-text">Call us during office hours for quick inquiries.</p>
 
           <div class="link-list">
-            <a class="smart-link" href="tel:+959123456789">
-              <span>+95 9 123 456 789</span>
+            <a class="smart-link" href="tel:+959794252030">
+              <span>+959794252030</span>
               <small>Tap to call</small>
             </a>
             <a class="smart-link" href="https://wa.me/959123456789" target="_blank" rel="noopener">
@@ -258,7 +258,7 @@ footer a:hover{ color: var(--pri); }
       </div>
 
       <div class="contact-note">
-        <strong>Office Hours:</strong> Mon–Fri (8:00 AM – 4:30 PM) • <strong>Location:</strong> Add your school address here.
+        <strong>Office Hours:</strong> Mon–Fri (8:00 AM – 4:30 PM) • <strong>Location:</strong>  No. (52/53) Khaing Shwe Wa Street, Singagiri Ward, Magway Town.
       </div>
     </div>
 

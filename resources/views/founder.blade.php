@@ -137,7 +137,7 @@
 
 </style>
 
- {{-- SCHOOL THEME ANIMATED BACKGROUND (ONLY BG, CONTENT ကို မထိပါ) --}}
+
   <div class="school-animated-bg">
     <div class="school-icon">📚</div>
     <div class="school-icon">✏️</div>
@@ -154,7 +154,7 @@
     <div class="text-center mb-4" data-aos="fade-up">
       <h2 class="fw-bold">Founder’s Message</h2>
       <p class="text-muted mb-0">
-        Our vision & commitment for quality education at Pioneer School.
+       A guiding star that will nurture you to become a good person.
       </p>
     </div>
 
@@ -163,7 +163,7 @@
         {{-- Photo --}}
         <div class="col-lg-4">
           <div class="founder-photo">
-            <img src="{{ asset('images/pioneer11.jpg') }}" alt="Founder of Pioneer School">
+            <img src="{{ asset('images/pioneer32.jpg') }}" alt="Founder of Pioneer School">
           </div>
         </div>
 
@@ -171,11 +171,11 @@
         <div class="col-lg-8">
           <div class="d-flex align-items-center justify-content-between mb-2">
             <div>
-              <div class="founder-name">U Aung Min</div>
+              <div class="founder-name">U Thet Khine</div>
               <div class="founder-role">Founder &amp; Chairman, Pioneer School</div>
             </div>
             <span class="founder-chip">
-              <i class="bi bi-lightbulb-fill"></i> Since 2010
+              <i class="bi bi-lightbulb-fill"></i> Since 2016
             </span>
           </div>
 
@@ -186,7 +186,7 @@
           </p>
 
           <p class="founder-meta mb-3">
-            With over 20 years in the education field, our founder continues to guide
+            With over 10 years in the education field, our founder continues to guide
             the school’s vision, teacher development and student support programmes.
           </p>
 
