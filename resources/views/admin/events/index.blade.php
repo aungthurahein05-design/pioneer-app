@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+
+@can('event.view')
 <div class="container py-4">
     <h2 class="mb-3">Events (Admin)</h2>
 
@@ -102,4 +104,6 @@
         </tbody>
     </table>
 </div>
+
+@endcan
 @endsection

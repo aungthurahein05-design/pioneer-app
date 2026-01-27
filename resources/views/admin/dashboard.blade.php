@@ -47,40 +47,54 @@
                             </a>
                             @endcan
 
+                            @can('event.view')
                              <a href="{{ route('admin.events.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Events
                             </a>
+                            @endcan 
 
+                            @can('promotion.view')
                              <a href="{{ route('admin.promotions.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Student Promotion
                             </a>
+                            @endcan
 
+                            @can('exam-result.view')
                             <a href="{{ route('admin.exam-results.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 ExamResult
                             </a>
+                            @endcan
 
+                              @can('classroom.view')
                               <a href="{{ route('admin.classrooms.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Classroom
                             </a>
+                            @endcan
 
+                              @can('section.view')
                               <a href="{{ route('admin.sections.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Section
                             </a>
+                            @endcan
 
+                              @can('student.view')
                              <a href="{{ route('admin.students.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Student
                             </a>
+                            @endcan
+
+                              @can('enroll.view')
                             <a href="{{ route('admin.enroll.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Enroll
                             </a>
-
+                            @endcan                 
 
                             
 

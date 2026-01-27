@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('subject.view')
 <div class="container py-4">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h2 class="mb-0">Subjects (Admin)</h2>
@@ -67,4 +68,6 @@
         </div>
     @endif
 </div>
+
+@endcan
 @endsection

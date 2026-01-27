@@ -26,7 +26,42 @@ class RolePermissionSeeder extends Seeder
             'subject.edit',
             'subject.delete',
 
+            'event.view',
+            'event.create',
+            'event.edit',
+            'event.delete',
 
+            'promotion.view',
+            'promotion.create',
+            'promotion.edit',
+            'promotion.delete',
+
+            'exam-result.view',
+            'exam-result.create',
+            'exam-result.edit',
+            'exam-result.delete',
+
+            'classroom.view',
+            'classroom.create',
+            'classroom.edit',
+            'classroom.delete',
+
+            'section.view',
+            'section.create',
+            'section.edit',
+            'section.delete',
+
+            'student.view',
+            'student.create',
+            'student.edit',
+            'student.delete',
+            
+            'enroll.view',
+            'enroll.create',
+            'enroll.edit',
+            'enroll.delete',
+
+            
         ];
 
         foreach ($permissions as $permission) {
@@ -64,6 +99,8 @@ class RolePermissionSeeder extends Seeder
             'subject.view',
             'subject.create',
             'subject.edit',
+
+            'event.view',
            
         ]);
 
