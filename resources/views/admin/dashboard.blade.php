@@ -46,21 +46,14 @@
                                 Subjects
                             </a>
                             @endcan
-<<<<<<< HEAD
 
-=======
-                            {{--Events--}}
->>>>>>> 3bd7db447816e90a19d9de626ddc4ab6b7921938
                             @can('event.view')
                              <a href="{{ route('admin.events.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Events
                             </a>
-<<<<<<< HEAD
-                            @endcan 
-=======
                             @endcan
->>>>>>> 3bd7db447816e90a19d9de626ddc4ab6b7921938
+
 
                             @can('promotion.view')
                              <a href="{{ route('admin.promotions.index') }}" class="btn btn-outline-primary btn-sm">
