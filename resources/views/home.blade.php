@@ -187,7 +187,7 @@
       pointer-events: none;
       overflow: hidden;
          background-color: #dafcfcff;
-    color: #ffffff;   /* text မျက်နှာမပျောက်အောင် စာရောင်လည်း ဖြူစေလိုက် */
+    color: #ffffff;   
 
     }
 
