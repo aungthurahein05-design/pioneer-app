@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('event.view')
 <div class="container py-4">
     <h2 class="mb-3">Events (Admin)</h2>
 
@@ -8,11 +9,14 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    @can('event.create')
     <div class="mb-3">
         <a href="{{ route('admin.events.create') }}" class="btn btn-primary">
             + Add Event
         </a>
     </div>
+    @endcan
+
 
     <table class="table table-bordered table-striped align-middle">
         <thead>
@@ -81,8 +85,15 @@
 
                 {{-- Actions --}}
                 <td>
+                    {{--Edit--}}
+                    @can('event.edit')
                     <a href="{{ route('admin.events.edit', $event->id) }}"
                        class="btn btn-sm btn-warning">Edit</a>
+
+                    @endcan
+
+                    {{--Delete--}}
+                    @can('event.delete')
 
                     <form action="{{ route('admin.events.destroy', $event->id) }}"
                           method="POST"
@@ -92,6 +103,7 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
+                    @endcan
                 </td>
             </tr>
         @empty
@@ -102,4 +114,5 @@
         </tbody>
     </table>
 </div>
+@endcan
 @endsection

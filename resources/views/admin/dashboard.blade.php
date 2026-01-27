@@ -46,11 +46,13 @@
                                 Subjects
                             </a>
                             @endcan
-
+                            {{--Events--}}
+                            @can('event.view')
                              <a href="{{ route('admin.events.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>
                                 Events
                             </a>
+                            @endcan
 
                              <a href="{{ route('admin.promotions.index') }}" class="btn btn-outline-primary btn-sm">
                                 <i class="bi bi-buildings me-1"></i>

@@ -205,7 +205,7 @@
     {{-- Hero --}}
     <section class="hero">
         <div class="container">
-            <h1>🎓 Pioneer Private School</h1>
+            <h1>🎓 Pioneer Private High School</h1>
             <p>Shaping the Future with Knowledge & Kindness</p>
         </div>
     </section>
@@ -253,9 +253,9 @@
                         ['pioneer4.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
                         ['pioneer5.jpg','Sports Day','A day filled with energy and friendly competition.'],
                         ['pioneer6.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
-                        ['pioneer7.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
-                        ['pioneer8.jpg','Sports Day','A day filled with energy and friendly competition.'],
-                        ['pioneer9.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
+                        ['pioneer34.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
+                        ['pioneer35.jpg','Sports Day','A day filled with energy and friendly competition.'],
+                        ['pioneer36.jpg','Science Fair','Our students showcasing their innovation and creativity.'],
                         ['pioneer21.jpg','Smart Classroom','Modern teaching tools help students learn better.'],
                         ['pioneer16.jpg','Sports Day','A day filled with energy and friendly competition.'],
                         ['pioneer17.jpg','Science Fair','Our students showcasing their innovation and creativity.'],

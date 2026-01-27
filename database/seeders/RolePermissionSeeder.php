@@ -27,6 +27,15 @@ class RolePermissionSeeder extends Seeder
             'subject.delete',
 
 
+            
+            'event.view',
+            'event.create',
+            'event.edit',
+            'event.delete',
+
+
+
+
         ];
 
         foreach ($permissions as $permission) {
@@ -49,11 +58,15 @@ class RolePermissionSeeder extends Seeder
             'teacher.view',
             'teacher.create',
             'teacher.edit',
-           
-
+            
             'subject.view',
             'subject.create',
             'subject.edit',
+
+              'event.view',
+            'event.create',
+            'event.edit',
+            
            
         ]);
 
@@ -64,7 +77,7 @@ class RolePermissionSeeder extends Seeder
             'subject.view',
             'subject.create',
             'subject.edit',
-           
+            
         ]);
 
         $student->givePermissionTo([
