@@ -90,11 +90,35 @@ class RolePermissionSeeder extends Seeder
             'subject.create',
             'subject.edit',
 
-              'event.view',
+            'event.view',
             'event.create',
             'event.edit',
+
+             'promotion.view',
+            'promotion.create',
+            'promotion.edit',
+
+            'exam-result.view',
             
+            'classroom.view',
+            'classroom.create',
+            'classroom.edit',
+
+            'section.view',
+            'section.create',
+            'section.edit',
+
+            
+            'student.view',
+            'student.create',
+            'student.edit',
            
+            
+            'enroll.view',
+            'enroll.create',
+            'enroll.edit',
+            'enroll.delete',
+
         ]);
 
         $teacher->givePermissionTo([
@@ -107,6 +131,18 @@ class RolePermissionSeeder extends Seeder
 
 
             'event.view',
+
+            'exam-result.view',
+            'exam-result.create',
+            'exam-result.edit',
+            'exam-result.delete',
+           
+            
+            'classroom.view',
+
+            'section.view',
+            
+            'student.view',
            
 
         ]);
@@ -114,9 +150,15 @@ class RolePermissionSeeder extends Seeder
         $student->givePermissionTo([
 
            'dashboard',
-
+           'teacher.view',
             'subject.view',
-           
+            'exam-result.view',
+            'event.view',
+            'promotion.view',
+            
+            'classroom.view',
+            'section.view',
+            
            
         ]);
     }

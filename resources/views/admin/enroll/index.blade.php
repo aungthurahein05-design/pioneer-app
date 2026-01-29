@@ -1,10 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('enroll.view')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="mb-0">Enrollments</h2>
+        @can('enroll.create')
         <a href="{{ route('admin.enroll.create') }}" class="btn btn-primary">+ Add Enrollment</a>
+        @endcan
     </div>
 
     @if(session('success'))
@@ -36,12 +39,17 @@
                         <td>{{ $enroll->address }}</td>
                         <td>{{ $enroll->dob }}</td>
                         <td>
-                            <a href="{{ route('admin.enroll.edit', $enroll) }}" class="btn btn-sm btn-warning">Edit</a>
+                        @can('enroll.edit')    
+                        <a href="{{ route('admin.enroll.edit', $enroll) }}" class="btn btn-sm btn-warning">Edit</a>
+                        @endcan
+
+                        @can('enroll.delete')
                             <form action="{{ route('admin.enroll.destroy', $enroll) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this enrollment?');">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">Delete</button>
                             </form>
+                        @endcan
                         </td>
                     </tr>
                 @empty
@@ -53,4 +61,5 @@
         </table>
     </div>
 </div>
+@endcan
 @endsection

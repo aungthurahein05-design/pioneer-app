@@ -1,10 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+
+@can('exam-result.view')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="mb-0">Exam Results (Admin)</h3>
+        
+        @can('exam-result.create')
         <a href="{{ route('admin.exam-results.create') }}" class="btn btn-primary">+ Add Result</a>
+        @endcan
     </div>
 
     @if(session('success'))
@@ -101,10 +106,14 @@
                             <td>{{ $r->grade_letter }}</td>
                             <td><span class="badge bg-info text-dark">{{ $r->status }}</span></td>
                             <td>
+                                @can('exam-result.edit')
                                 <a class="btn btn-sm btn-warning" href="{{ route('admin.exam-results.edit', $r) }}">Edit</a>
+                                @endcan
                                 <form action="{{ route('admin.exam-results.destroy', $r) }}" method="POST" class="d-inline">
                                     @csrf @method('DELETE')
+                                    @can('exam-result.delete')
                                     <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this record?')">Del</button>
+                                    @endcan
                                 </form>
                             </td>
                         </tr>
@@ -119,4 +128,6 @@
         </div>
     </div>
 </div>
+
+@endcan
 @endsection

@@ -1,14 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
+
+@can('student.view')
 <div class="container">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <h2 class="mb-0">Student List</h2>
 
         {{-- Add Student Button --}}
+        @can('student.create')
         <a href="{{ route('admin.students.create') }}" class="btn btn-primary">
             <i class="bi bi-person-plus me-1"></i> Add Student
         </a>
+        @endcan
     </div>
 
     {{-- Success Message --}}
@@ -77,24 +81,23 @@
                         </td>
 
                         <td class="text-nowrap">
-                            <a href="{{ route('admin.students.show', $student->id) }}"
-                               class="btn btn-sm btn-info text-white">
-                                <i class="bi bi-eye"></i>
-                            </a>
+                            @can('student.edit')
 
                             <a href="{{ route('admin.students.edit', $student->id) }}"
                                class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-
+                            @endcan
                             <form action="{{ route('admin.students.destroy', $student->id) }}"
                                   method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
+                                @can('student.delete')
                                 <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="return confirm('Are you sure?')">
                                     <i class="bi bi-trash"></i>
                                 </button>
+                                @endcan
                             </form>
                         </td>
                     </tr>
@@ -109,4 +112,5 @@
         </table>
     </div>
 </div>
+@endcan
 @endsection

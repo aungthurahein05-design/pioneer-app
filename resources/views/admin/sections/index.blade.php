@@ -1,12 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
+@can('section.view')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Sections</h3>
+        @can('section.create')
         <a class="btn btn-primary" href="{{ route('admin.sections.create') }}">
             Add Section
         </a>
+        @endcan
     </div>
 
     @if(session('success'))
@@ -35,11 +38,12 @@
                        href="{{ route('admin.sections.show', $section->id) }}">
                         View
                     </a>
-
+                    @can('section.edit')
                     <a class="btn btn-sm btn-warning"
                        href="{{ route('admin.sections.edit', $section->id) }}">
                         Edit
                     </a>
+                    @endcan
 
                     <form class="d-inline"
                           method="POST"
@@ -47,9 +51,11 @@
                           onsubmit="return confirm('Delete this section?')">
                         @csrf
                         @method('DELETE')
+                        @can('section.delete')
                         <button class="btn btn-sm btn-danger">
                             Delete
                         </button>
+                        @endcan
                     </form>
                 </td>
             </tr>
@@ -59,4 +65,5 @@
 
     {{ $sections->links() }}
 </div>
+@endcan
 @endsection

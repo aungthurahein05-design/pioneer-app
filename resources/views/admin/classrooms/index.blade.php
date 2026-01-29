@@ -1,9 +1,13 @@
 @extends('layouts.admin')
 @section('content')
+
+@can('classroom.view')
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Classrooms</h3>
-        <a class="btn btn-primary" href="{{ route('admin.classrooms.create') }}">Add Classroom (SayarMyo)</a>
+        @can('classroom.create')
+        <a class="btn btn-primary" href="{{ route('admin.classrooms.create') }}">Add Classroom </a>
+        @endcan
     </div>
 
     @if(session('success'))
@@ -24,11 +28,15 @@
                 <td>{{ $c->code }}</td>
                 <td>
                     <a class="btn btn-sm btn-info" href="{{ route('admin.classrooms.show',$c->id) }}">View</a>
+                    @can('classroom.edit')
                     <a class="btn btn-sm btn-warning" href="{{ route('admin.classrooms.edit',$c->id) }}">Edit</a>
+                    @endcan
                     <form class="d-inline" method="POST" action="{{ route('admin.classrooms.destroy',$c->id) }}"
                           onsubmit="return confirm('Delete classroom?')">
                         @csrf @method('DELETE')
+                        @can('classroom.delete')
                         <button class="btn btn-sm btn-danger">Delete</button>
+                        @endcan
                     </form>
                 </td>
             </tr>
@@ -38,4 +46,5 @@
 
     {{ $classrooms->links() }}
 </div>
+@endcan
 @endsection
