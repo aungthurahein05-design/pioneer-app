@@ -144,9 +144,9 @@
             <label class="form-label">Photo</label><br>
 
             @if($student->photo)
-                <img src="{{ asset('storage/' . $student->photo) }}"
-                     alt="{{ $student->name }}"
-                     style="width:70px; height:70px; object-fit:cover; border-radius:50%; margin-bottom:10px;">
+                                <img src="{{ asset($student->photo) }}"
+                                    alt="{{ $student->name }}"
+                                    style="width:40px; height:40px; object-fit:cover; border-radius:50%;">
             @endif
 
             <input type="file" name="photo" class="form-control" accept="image/*">

@@ -62,15 +62,17 @@
                         <td>{{ $student->guardian_phone ?? '-' }}</td>
                         <td>{{ $student->phone ?? '-' }}</td>
 
+
                         <td>
                             @if($student->photo)
-                                <img src="{{ asset('storage/' . $student->photo) }}"
-                                     alt="{{ $student->name }}"
-                                     style="width:40px; height:40px; object-fit:cover; border-radius:50%;">
+                                <img src="{{ asset($student->photo) }}"
+                                    alt="{{ $student->name }}"
+                                    style="width:40px; height:40px; object-fit:cover; border-radius:50%;">
                             @else
                                 -
                             @endif
                         </td>
+
 
                         <td>{{ $student->email ?? '-' }}</td>
 
